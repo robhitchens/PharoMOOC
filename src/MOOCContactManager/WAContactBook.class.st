@@ -34,7 +34,8 @@ WAContactBook >> renderContact: aContact on: html [
 	html tableRow: [ 
 		html 
 			tableData: aContact fullname ;
-			tableData: aContact email ]
+			tableData: aContact email;
+			tableData: [ self renderPhotoOf: aContact on: html ] ]
 ]
 
 { #category : #rendering }
@@ -43,7 +44,8 @@ WAContactBook >> renderContactsOn: html [
 		html tableHead: [ 
 			html 
 				tableHeading: 'Name';
-				tableHeading: 'Email' ].
+				tableHeading: 'Email';
+				tableHeading: 'Photo' ].
 			self contactsDo: [ :contact | self renderContact: contact on: html ] ]
 ]
 
@@ -58,6 +60,11 @@ WAContactBook >> renderContentOn: html [
 				level: 1;
 				with: 'My Contact Book'.
 			self renderContactsOn: html ]
+]
+
+{ #category : #rendering }
+WAContactBook >> renderPhotoOf: aContact on: html [ 
+	html image url: aContact gravatarUrl 
 ]
 
 { #category : #updating }

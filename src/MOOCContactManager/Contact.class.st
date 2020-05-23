@@ -49,6 +49,11 @@ Contact >> fullname: aString [
 	fullname := aString
 ]
 
+{ #category : #'as yet unclassified' }
+Contact >> gravatarUrl [
+	^ 'http://www.gravatar.com/avatar/', (MD5 hashMessage: email trimBoth asLowercase ) hex, '.jpg'
+]
+
 { #category : #printing }
 Contact >> printOn: aStream [
 	"comment stating purpose of instance-side message"
