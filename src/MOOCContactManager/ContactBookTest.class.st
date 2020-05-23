@@ -37,3 +37,12 @@ ContactBookTest >> testRemoveContact [
 	self assert: contactBook contacts isEmpty.
 	"TODO need to add test to test case where collection is empty when removing contact"
 ]
+
+{ #category : #tests }
+ContactBookTest >> testRemoveContactWhenEmpty [
+	| contactToRemove contactBook |
+	contactToRemove := Contact newNamed: 'Robert Hitchens' email: 'rhitchens@some.domain'.
+	contactBook := ContactBook new.
+	contactBook contacts.
+	self should: [ contactBook removeContact: contactToRemove ] raise: NotFound.
+]

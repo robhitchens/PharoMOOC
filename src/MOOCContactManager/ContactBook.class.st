@@ -22,5 +22,5 @@ ContactBook >> contacts [
 
 { #category : #adding }
 ContactBook >> removeContact: aContact [
-	self contacts remove: aContact 
+	self contacts remove: aContact ifAbsent: [ self contacts errorNotFound: aContact ]
 ]
