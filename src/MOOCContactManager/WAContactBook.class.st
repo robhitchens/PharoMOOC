@@ -12,6 +12,16 @@ WAContactBook class >> initialize [
 	WAAdmin register: self asApplicationAt: 'contacts'.
 ]
 
+{ #category : #accessing }
+WAContactBook >> contactBook [ 
+	^ contactBook ifNil: [ contactBook := ContactBook createDefault ]
+]
+
+{ #category : #accessing }
+WAContactBook >> contacts [
+	^ self contactBook contacts
+]
+
 { #category : #rendering }
 WAContactBook >> renderContentOn: html [ 
 	"Main entry point of the view. Render a title"
