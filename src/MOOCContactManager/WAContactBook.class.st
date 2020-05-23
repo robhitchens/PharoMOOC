@@ -39,7 +39,7 @@ WAContactBook >> renderContact: aContact on: html [
 
 { #category : #rendering }
 WAContactBook >> renderContactsOn: html [ 
-	html table: [ 
+	html tbsTable: [ 
 		html tableHead: [ 
 			html 
 				tableHeading: 'Name';
@@ -48,13 +48,16 @@ WAContactBook >> renderContactsOn: html [
 ]
 
 { #category : #rendering }
-WAContactBook >> renderContentOn: html [ 
+WAContactBook >> renderContentOn: html [
 	"Main entry point of the view. Render a title"
+
 	"WAContactBook initialize"
-	html heading 
-		level: 1;
-		with: 'My Contact Book'.
-	self renderContactsOn: html
+
+	html
+		tbsContainer: [ html heading
+				level: 1;
+				with: 'My Contact Book'.
+			self renderContactsOn: html ]
 ]
 
 { #category : #updating }
