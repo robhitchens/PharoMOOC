@@ -31,7 +31,7 @@ WAContactBook >> contactsDo: aBlock [
 WAContactBook >> renderContact: aContact on: html [ 
 	html tableRow: [ 
 		html 
-			tableData: aContact fullName ;
+			tableData: aContact fullname ;
 			tableData: aContact email ]
 ]
 
