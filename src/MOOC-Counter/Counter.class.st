@@ -26,3 +26,13 @@ Counter >> count [
 Counter >> count: aNumber [
 	count := aNumber
 ]
+
+{ #category : #operation }
+Counter >> decrement [
+	self count: self count - 1
+]
+
+{ #category : #operation }
+Counter >> increment [
+	self count: self count + 1
+]
