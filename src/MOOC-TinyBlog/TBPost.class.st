@@ -14,6 +14,24 @@ Class {
 	#category : #'MOOC-TinyBlog'
 }
 
+{ #category : #'as yet unclassified' }
+TBPost class >> title: aTitle text: aText [
+	^ self new
+		title: aTitle;
+		text: aText;
+		yourself 
+]
+
+{ #category : #'as yet unclassified' }
+TBPost class >> unclassifiedTag [
+	^ 'Unclassified'
+]
+
+{ #category : #actions }
+TBPost >> beVisible [
+	self visible: true
+]
+
 { #category : #accessing }
 TBPost >> category [
 	^ category
@@ -33,6 +51,28 @@ TBPost >> date [
 TBPost >> date: anObject [
 	date := anObject
 	
+]
+
+{ #category : #initialization }
+TBPost >> initialize [
+	self category: self class unclassifiedTag.
+	self date: Date today.
+	self notVisible 
+]
+
+{ #category : #testing }
+TBPost >> isUnclassified [
+	^ self category = self class unclassifiedTag 
+]
+
+{ #category : #actions }
+TBPost >> isVisible [ 
+	^ self visible
+]
+
+{ #category : #actions }
+TBPost >> notVisible [
+	self visible: false
 ]
 
 { #category : #accessing }
