@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #tests }
+CounterTest >> testAlternateCreationMethod [
+	self assert: ((Counter withValue: 19) increment; count) equals: 20
+]
+
+{ #category : #tests }
 CounterTest >> testCountIsSetAndRead [
 	| c |
 	c := Counter new.
@@ -26,4 +31,9 @@ CounterTest >> testIncrement [
 	c := Counter new.
 	c count: 0; increment; increment.
 	self assert: c count equals: 2
+]
+
+{ #category : #tests }
+CounterTest >> testValueAtCreationTimeIsZero [
+	self assert: Counter new count equals: 0
 ]

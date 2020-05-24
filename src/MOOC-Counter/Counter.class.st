@@ -16,6 +16,13 @@ Class {
 	#category : #'MOOC-Counter'
 }
 
+{ #category : #initialization }
+Counter class >> withValue: anInteger [
+	| c |
+	c := self new count: anInteger.
+	^ c
+]
+
 { #category : #accessing }
 Counter >> count [ 
 	"return the current value of the value instance variable"
@@ -35,4 +42,17 @@ Counter >> decrement [
 { #category : #operation }
 Counter >> increment [
 	self count: self count + 1
+]
+
+{ #category : #initialization }
+Counter >> initialize [
+	self count: 0
+]
+
+{ #category : #printing }
+Counter >> printOn: aStream [
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' with value: ';
+		nextPutAll: self count.
 ]
