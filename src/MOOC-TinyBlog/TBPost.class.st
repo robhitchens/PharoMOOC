@@ -11,7 +11,7 @@ Class {
 		'category',
 		'visible'
 	],
-	#category : #'MOOC-TinyBlog'
+	#category : #'MOOC-TinyBlog-Main'
 }
 
 { #category : #'as yet unclassified' }
