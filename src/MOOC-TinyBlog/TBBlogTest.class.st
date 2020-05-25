@@ -69,6 +69,18 @@ TBBlogTest >> testAllVisibleBlogPostsFromCategory [
 ]
 
 { #category : #tests }
+TBBlogTest >> testDeleteACategoryAndPosts [
+	| categoryToDelete |
+	categoryToDelete := 'Second Category'.
+	blog writeBlogPost: post.
+	self assert: blog allCategories size equals: 2.
+	self assert: ((blog allBlogPostsFromCategory: categoryToDelete) size) equals: 1.
+	blog deleteCategoryAndPosts: categoryToDelete.
+	self assert: blog allCategories size equals: 1.
+	self assert: ((blog allBlogPostsFromCategory: categoryToDelete) size) equals: 0
+]
+
+{ #category : #tests }
 TBBlogTest >> testRemoveAllBlogPosts [
 	blog removeAllPosts.
 	self assert: blog size equals: 0

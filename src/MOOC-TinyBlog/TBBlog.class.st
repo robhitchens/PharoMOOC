@@ -95,6 +95,18 @@ TBBlog >> allVisibleBlogPostsFromCategory: aCategory [
 	^ posts select: [ :post | post category = aCategory and: [ post isVisible ] ]
 ]
 
+{ #category : #'as yet unclassified' }
+TBBlog >> deleteCategoryAndPosts: aCategory [
+	"TODO this seems a little tedious removing all posts and then re writing all posts that aren't in the 
+	category to be deleted"
+
+	| updatedPosts |
+	updatedPosts := (self allBlogPosts
+		reject: [ :post | post category = aCategory ]) asOrderedCollection.
+	self removeAllPosts.
+	updatedPosts do: [ :post | self writeBlogPost: post ]
+]
+
 { #category : #initialization }
 TBBlog >> initialize [
 	super initialize.
