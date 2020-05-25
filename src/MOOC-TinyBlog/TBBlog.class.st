@@ -41,7 +41,7 @@ TBBlog >> allBlogPostsFromCategory: aCategory [
 
 { #category : #'as yet unclassified' }
 TBBlog >> allCategories [
-	^ (self allBlogPosts collect: [ :post | post category]) asSet
+	^ (self allBlogPosts collect: [ :post | post category ]) asSet
 ]
 
 { #category : #'as yet unclassified' }
