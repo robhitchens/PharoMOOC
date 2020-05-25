@@ -81,6 +81,17 @@ TBBlogTest >> testDeleteACategoryAndPosts [
 ]
 
 { #category : #tests }
+TBBlogTest >> testMovePostToCategory [
+	| testPost newPostCategory existingPostCategory |
+	testPost := TBPost title: 'test' text: 'some text' category: 'ExampleCategory'.
+	existingPostCategory := testPost category.
+	newPostCategory := 'NewCategory'.
+	self assert: testPost category equals: existingPostCategory.
+	blog movePost: testPost to: newPostCategory.
+	self assert: testPost category equals: newPostCategory
+]
+
+{ #category : #tests }
 TBBlogTest >> testRemoveAllBlogPosts [
 	blog removeAllPosts.
 	self assert: blog size equals: 0

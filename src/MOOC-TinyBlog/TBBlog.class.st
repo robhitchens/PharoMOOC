@@ -113,6 +113,12 @@ TBBlog >> initialize [
 	posts := OrderedCollection new.
 ]
 
+{ #category : #'as yet unclassified' }
+TBBlog >> movePost: aTBPost to: aCategory [
+	aTBPost category: aCategory.
+	^ aTBPost
+]
+
 { #category : #removing }
 TBBlog >> removeAllPosts [
 	posts := OrderedCollection new
