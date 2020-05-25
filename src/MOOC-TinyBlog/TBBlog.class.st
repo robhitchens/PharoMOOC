@@ -118,6 +118,11 @@ TBBlog >> removeAllPosts [
 	posts := OrderedCollection new
 ]
 
+{ #category : #'as yet unclassified' }
+TBBlog >> renameCategory: oldCategoryName to: newCategoryName [
+	self allBlogPosts do: [ :post | (post category = oldCategoryName) ifTrue: [ post category: newCategoryName ] ]
+]
+
 { #category : #accessing }
 TBBlog >> size [ 
 	^ posts size

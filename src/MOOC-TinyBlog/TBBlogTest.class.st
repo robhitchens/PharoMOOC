@@ -87,6 +87,19 @@ TBBlogTest >> testRemoveAllBlogPosts [
 ]
 
 { #category : #tests }
+TBBlogTest >> testRenameCategoryTo [
+	| categoryToRename newCategoryName |
+	categoryToRename := 'Second Category'.
+	newCategoryName := 'First Category'.
+	blog writeBlogPost: post.
+	self assert: (blog allCategories size) equals: 2.
+	blog renameCategory: categoryToRename to: newCategoryName.
+	self assert: (blog allCategories size) equals: 1.
+	"TODO need to figure out how to verify that the set element's category is newCategoryName"
+	"self assert: (blog allCategories at: 1) category equals: newCategoryName"
+]
+
+{ #category : #tests }
 TBBlogTest >> testSize [ 
 	self assert: blog size equals: 1
 ]
