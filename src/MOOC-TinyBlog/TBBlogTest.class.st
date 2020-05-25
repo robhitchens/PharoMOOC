@@ -50,6 +50,12 @@ TBBlogTest >> testAllCategories [
 ]
 
 { #category : #tests }
+TBBlogTest >> testAllCategoriesWithVisibleBlogPost [
+	blog writeBlogPost: post.
+	self assert: blog allCategoriesWithVisibleBlogPost size equals: 1
+]
+
+{ #category : #tests }
 TBBlogTest >> testAllVisibleBlogPosts [
 	blog writeBlogPost: post.
 	self assert: blog allVisibleBlogPosts size equals: 1

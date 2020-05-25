@@ -45,6 +45,12 @@ TBBlog >> allCategories [
 ]
 
 { #category : #'as yet unclassified' }
+TBBlog >> allCategoriesWithVisibleBlogPost [
+	^ ((self allBlogPosts select: [ :post | post isVisible ])
+		collect: [ :visiblePost | visiblePost category ]) asSet
+]
+
+{ #category : #'as yet unclassified' }
 TBBlog >> allVisibleBlogPosts [
 	^ posts select: [ :post | post isVisible ]
 ]
