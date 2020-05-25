@@ -15,11 +15,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-TBPost class >> title: aTitle text: aText [
+TBPost class >> title: aTitle text: someText [
 	^ self new
 		title: aTitle;
-		text: aText;
-		category: self class unclassified;
+		text: someText;
+		category: (self unclassifiedTag);
 		yourself 
 ]
 
