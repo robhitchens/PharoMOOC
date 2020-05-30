@@ -68,6 +68,7 @@ TBTeapotWebApp >> pageForPostNumber: aPostNumber [
 			s << ('<h3>', currentPost date mmddyyyy, '</h3>').
 			s << ('<p> Category: ', currentPost category, '</p>').
 			s << ('<p>', currentPost text, '</p>').
+			s << ('<p><a href="/">back to home</a></p>').
 			self renderPageFooterOn: s ]
 ]
 
