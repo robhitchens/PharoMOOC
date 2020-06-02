@@ -51,7 +51,10 @@ TBBlog class >> createDemoPosts [
 { #category : #accessing }
 TBBlog class >> current [
 	"answer the instance of the TBRepository"
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
+"	^ uniqueInstance ifNil: [ uniqueInstance := self new ]"
+	^ self selectAll 
+		ifNotEmpty: [ :x | x anyOne ]
+		ifEmpty:  [ self new save ]
 ]
 
 { #category : #'class initialization' }
@@ -60,8 +63,20 @@ TBBlog class >> initialize [
 ]
 
 { #category : #initialization }
+TBBlog class >> initializeVoyageOnMemoryDB [
+	VOMemoryRepository new enableSingleton 
+]
+
+{ #category : #testing }
+TBBlog class >> isVoyageRoot [ 
+"indicates that instances of this class are top level document in noSQL databases"
+^ true
+]
+
+{ #category : #initialization }
 TBBlog class >> reset [ 
-	uniqueInstance := nil
+"	uniqueInstance := nil"
+	self initializeVoyageOnMemoryDB 
 ]
 
 { #category : #'as yet unclassified' }
@@ -121,7 +136,9 @@ TBBlog >> movePost: aTBPost to: aCategory [
 
 { #category : #removing }
 TBBlog >> removeAllPosts [
-	posts := OrderedCollection new
+	posts do: [ :each | each remove ].
+	posts := OrderedCollection new.
+	self save
 ]
 
 { #category : #'as yet unclassified' }
@@ -137,5 +154,9 @@ TBBlog >> size [
 { #category : #writing }
 TBBlog >> writeBlogPost: aPost [
 	"Write the blog post in database"
-	posts add: aPost
+"	posts add: aPost"
+"	self allBlogPosts add: aPost."
+	posts add: aPost.
+	aPost save.
+	self save
 ]
