@@ -63,6 +63,16 @@ TBBlog class >> initialize [
 ]
 
 { #category : #initialization }
+TBBlog class >> initializeLocalhostMongoDB [
+	| repository |
+	repository := (VOMongoRepository
+		host: 'localhost' 
+		port: 27017
+		database: 'tinyblog').
+	repository enableSingleton.
+]
+
+{ #category : #initialization }
 TBBlog class >> initializeVoyageOnMemoryDB [
 	VOMemoryRepository new enableSingleton 
 ]
@@ -76,7 +86,8 @@ TBBlog class >> isVoyageRoot [
 { #category : #initialization }
 TBBlog class >> reset [ 
 "	uniqueInstance := nil"
-	self initializeVoyageOnMemoryDB 
+"	self initializeVoyageOnMemoryDB "
+	self initializeLocalhostMongoDB 
 ]
 
 { #category : #'as yet unclassified' }
