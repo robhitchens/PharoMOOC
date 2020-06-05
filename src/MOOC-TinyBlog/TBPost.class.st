@@ -63,6 +63,50 @@ TBPost >> date: anObject [
 	
 ]
 
+{ #category : #descriptions }
+TBPost >> descriptionCategory [
+	<magritteDescription>
+	^ MAStringDescription new 
+		accessor: #category;
+		yourself
+]
+
+{ #category : #descriptions }
+TBPost >> descriptionDate [
+	<magritteDescription>
+	^ MADateDescription new 
+		accessor: #date;
+		beRequired;
+		yourself
+]
+
+{ #category : #descriptions }
+TBPost >> descriptionText [
+	<magritteDescription>
+	^ MAMemoDescription new 
+		accessor: #text;
+		beRequired;
+		yourself
+]
+
+{ #category : #descriptions }
+TBPost >> descriptionTitle [ 
+	<magritteDescription>
+	^ MAStringDescription new
+		accessor: #title;
+		beRequired;
+		yourself 
+]
+
+{ #category : #descriptions }
+TBPost >> descriptionVisible [ 
+	<magritteDescription>
+	^ MABooleanDescription new 
+		accessor: #visible;
+		beRequired;
+		yourself 
+]
+
 { #category : #initialization }
 TBPost >> initialize [
 	self category: self class unclassifiedTag.
