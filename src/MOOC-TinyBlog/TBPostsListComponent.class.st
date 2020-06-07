@@ -11,7 +11,7 @@ TBPostsListComponent >> renderCategoryColumnOn: html [
 		smallSize: 2;
 		mediumSize: 4;
 		with: [ 
-			self basicRenderCategoriesOn: html.
+"			self basicRenderCategoriesOn: html."
 			self renderSignInOn: html ]
 ]
 
@@ -23,7 +23,7 @@ TBPostsListComponent >> renderContentOn: html [
 		html tbsRow 
 			showGrid ;
 			with: [ self renderCategoryColumnOn: html.
-				self renderPostColumnOn: html ] ]
+"				self renderPostColumnOn: html" ] ]
 ]
 
 { #category : #rendering }
