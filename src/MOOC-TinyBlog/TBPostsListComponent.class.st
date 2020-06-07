@@ -1,6 +1,6 @@
 Class {
 	#name : #TBPostsListComponent,
-	#superclass : #WAComponent,
+	#superclass : #TBScreenComponent,
 	#category : #'MOOC-TinyBlog-Components'
 }
 
@@ -18,12 +18,14 @@ TBPostsListComponent >> renderCategoryColumnOn: html [
 { #category : #rendering }
 TBPostsListComponent >> renderContentOn: html [ 
 	super renderContentOn: html.
-	html render: (TBAuthenticationComponent from: self).
+	self blog allVisibleBlogPosts do: [ :p |
+		html render: (TBPostComponent new post: p) ]
+"	html render: (TBAuthenticationComponent from: self).
 	html tbsContainer: [ 
 		html tbsRow 
 			showGrid ;
 			with: [ self renderCategoryColumnOn: html.
-"				self renderPostColumnOn: html" ] ]
+				self renderPostColumnOn: html ] ]"
 ]
 
 { #category : #rendering }
