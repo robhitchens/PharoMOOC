@@ -7,14 +7,14 @@ Class {
 	#category : #'MOOC-TinyBlog-Components'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 TBPostsListComponent >> basicRenderCategoriesOn: html [ 
 	^ html render: (TBCategoriesComponent 
 		categories: self blog allCategories 
 		postsList: self)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #rendering }
 TBPostsListComponent >> basicRenderPostsOn: html [ 
 	^ self readSelectedPosts do: [ :p | 
 		html render: (TBPostComponent new post: p) ]
@@ -34,7 +34,11 @@ TBPostsListComponent >> currentCategory: anObject [
 TBPostsListComponent >> readSelectedPosts [
 	^ self currentCategory 
 		ifNil: [ self blog allVisibleBlogPosts ]
-		ifNotNil: [ self blog allVisibleBlogPostsFromCategory: self currentCategory ]
+		ifNotNil: [ 
+			(currentCategory = 'All') 
+				ifTrue: [ self blog allVisibleBlogPosts ]
+				ifFalse: [ self blog allVisibleBlogPostsFromCategory: self currentCategory  ].
+		]
 ]
 
 { #category : #rendering }

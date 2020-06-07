@@ -10,7 +10,10 @@ Class {
 
 { #category : #'as yet unclassified' }
 TBCategoriesComponent class >> categories: aCollectionOfCategories postsList: aTBScreen [
-	^ self new categories: aCollectionOfCategories; postsList: aTBScreen 
+	| defaultCategories |
+	defaultCategories := OrderedCollection new.
+	defaultCategories add: 'All'; addAllLast: aCollectionOfCategories.
+	^ self new categories: defaultCategories; postsList: aTBScreen 
 ]
 
 { #category : #accessing }
