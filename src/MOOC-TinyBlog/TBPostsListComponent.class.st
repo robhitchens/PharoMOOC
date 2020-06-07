@@ -7,6 +7,19 @@ Class {
 	#category : #'MOOC-TinyBlog-Components'
 }
 
+{ #category : #'as yet unclassified' }
+TBPostsListComponent >> basicRenderCategoriesOn: html [ 
+	^ html render: (TBCategoriesComponent 
+		categories: self blog allCategories 
+		postsList: self)
+]
+
+{ #category : #'as yet unclassified' }
+TBPostsListComponent >> basicRenderPostsOn: html [ 
+	^ self readSelectedPosts do: [ :p | 
+		html render: (TBPostComponent new post: p) ]
+]
+
 { #category : #accessing }
 TBPostsListComponent >> currentCategory [
 	^ currentCategory 
@@ -31,24 +44,28 @@ TBPostsListComponent >> renderCategoryColumnOn: html [
 		smallSize: 2;
 		mediumSize: 4;
 		with: [ 
-"			self basicRenderCategoriesOn: html."
-			self renderSignInOn: html ]
+			self basicRenderCategoriesOn: html
+			"self renderSignInOn: html" ]
 ]
 
 { #category : #rendering }
 TBPostsListComponent >> renderContentOn: html [
 	super renderContentOn: html.
-	html render: (TBCategoriesComponent 
-		categories: (self blog allCategories) postsList: self).
-	html tbsContainer: [ 
-		self readSelectedPosts do: [ :post | 
-			html render: (TBPostComponent new post: post) ] ]
-	"	html render: (TBAuthenticationComponent from: self).
 	html tbsContainer: [ 
 		html tbsRow 
-			showGrid ;
-			with: [ self renderCategoryColumnOn: html.
-				self renderPostColumnOn: html ] ]"
+			showGrid;
+			with: [ 
+				self renderCategoryColumnOn: html.
+				self renderPostColumnOn: html ] ]
+]
+
+{ #category : #rendering }
+TBPostsListComponent >> renderPostColumnOn: html [ 
+	html tbsColumn 
+		extraSmallSize: 12;
+		smallSize: 10;
+		mediumSize: 8;
+		with: [ self basicRenderPostsOn: html ]
 ]
 
 { #category : #rendering }
