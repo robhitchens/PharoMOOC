@@ -1,8 +1,28 @@
 Class {
 	#name : #TBPostsListComponent,
 	#superclass : #TBScreenComponent,
+	#instVars : [
+		'currentCategory'
+	],
 	#category : #'MOOC-TinyBlog-Components'
 }
+
+{ #category : #accessing }
+TBPostsListComponent >> currentCategory [
+	^ currentCategory 
+]
+
+{ #category : #accessing }
+TBPostsListComponent >> currentCategory: anObject [
+	currentCategory := anObject 
+]
+
+{ #category : #'as yet unclassified' }
+TBPostsListComponent >> readSelectedPosts [
+	^ self currentCategory 
+		ifNil: [ self blog allVisibleBlogPosts ]
+		ifNotNil: [ self blog allVisibleBlogPostsFromCategory: self currentCategory ]
+]
 
 { #category : #rendering }
 TBPostsListComponent >> renderCategoryColumnOn: html [ 
@@ -16,11 +36,14 @@ TBPostsListComponent >> renderCategoryColumnOn: html [
 ]
 
 { #category : #rendering }
-TBPostsListComponent >> renderContentOn: html [ 
+TBPostsListComponent >> renderContentOn: html [
 	super renderContentOn: html.
-	self blog allVisibleBlogPosts do: [ :p |
-		html render: (TBPostComponent new post: p) ]
-"	html render: (TBAuthenticationComponent from: self).
+	html render: (TBCategoriesComponent 
+		categories: (self blog allCategories) postsList: self).
+	html tbsContainer: [ 
+		self readSelectedPosts do: [ :post | 
+			html render: (TBPostComponent new post: post) ] ]
+	"	html render: (TBAuthenticationComponent from: self).
 	html tbsContainer: [ 
 		html tbsRow 
 			showGrid ;
