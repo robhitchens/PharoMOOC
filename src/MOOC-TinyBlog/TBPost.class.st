@@ -77,6 +77,8 @@ TBPost >> descriptionDate [
 	^ MADateDescription new 
 		accessor: #date;
 		beRequired;
+		"Not sure if this is the correct way to validate that the date "
+		min: (Date new);"Don't know if this works or not."
 		yourself
 ]
 

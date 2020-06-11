@@ -2,10 +2,21 @@ Class {
 	#name : #TBPostsListComponent,
 	#superclass : #TBScreenComponent,
 	#instVars : [
-		'currentCategory'
+		'currentCategory',
+		'alertSuccess'
 	],
 	#category : #'MOOC-TinyBlog-Components'
 }
+
+{ #category : #accessing }
+TBPostsListComponent >> alertSuccess [
+	^ alertSuccess 
+]
+
+{ #category : #accessing }
+TBPostsListComponent >> alertSuccess: aString [
+	alertSuccess := aString
+]
 
 { #category : #rendering }
 TBPostsListComponent >> basicRenderCategoriesOn: html [ 
@@ -48,13 +59,18 @@ TBPostsListComponent >> renderCategoryColumnOn: html [
 		smallSize: 2;
 		mediumSize: 4;
 		with: [ 
-			self basicRenderCategoriesOn: html
-			"self renderSignInOn: html" ]
+			self basicRenderCategoriesOn: html.
+			self renderSignInOn: html ]
 ]
 
 { #category : #rendering }
 TBPostsListComponent >> renderContentOn: html [
 	super renderContentOn: html.
+	html render: (TBAuthenticationComponent from: self).
+	self alertSuccess ifNotNil: [ 
+		html tbsAlert beSuccess;
+		 	with: [ html strong: 'Message:'. html text: self alertSuccess ].
+			self alertSuccess: nil ].
 	html tbsContainer: [ 
 		html tbsRow 
 			showGrid;
