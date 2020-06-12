@@ -12,6 +12,17 @@ TBAdminComponent >> children [
 	^ super children copyWith: self report
 ]
 
+{ #category : #actions }
+TBAdminComponent >> disconnect [
+	self session logged: false.
+	self gotoPostsList
+]
+
+{ #category : #'as yet unclassified' }
+TBAdminComponent >> gotoPostsList [
+	self call: TBPostsListComponent new
+]
+
 { #category : #initialization }
 TBAdminComponent >> initialize [ 
 	super initialize.
@@ -27,8 +38,17 @@ TBAdminComponent >> renderContentOn: html [
 		html anchor 
 			callback: [ self answer ];
 			with: 'Public Area'.
+		self renderDisconnectOn: html.
 		html horizontalRule.
 		html render: self report. ]
+]
+
+{ #category : #rendering }
+TBAdminComponent >> renderDisconnectOn: html [
+	self session isLogged
+		ifFalse: [ ^ self ].
+	html tbsGlyphIcon perform: #iconLock.
+	html anchor callback: [ self disconnect ]; with: 'Disconnect'.
 ]
 
 { #category : #accessing }
