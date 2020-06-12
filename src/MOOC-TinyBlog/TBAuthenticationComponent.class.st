@@ -101,7 +101,8 @@ TBAuthenticationComponent >> renderOkCancelOn: html [
 
 { #category : #accessing }
 TBAuthenticationComponent >> validate [
- "TODO don't know if alert will be implemented later or if this part of the tutorial isn't correct"
 	(self account = 'admin' and: [ self password = 'password' ])
-		ifTrue: [ self component alertSuccess: 'Success!' ]
+		ifFalse: [ ^ self ].
+	self session logged: true.
+	self component gotoAdministration
 ]

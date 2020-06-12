@@ -152,6 +152,12 @@ TBBlog >> removeAllPosts [
 	self save
 ]
 
+{ #category : #removing }
+TBBlog >> removeBlogPost: aPost [
+	posts remove: aPost ifAbsent: [  ].
+	self save.
+]
+
 { #category : #'as yet unclassified' }
 TBBlog >> renameCategory: oldCategoryName to: newCategoryName [
 	self allBlogPosts do: [ :post | (post category = oldCategoryName) ifTrue: [ post category: newCategoryName ] ]

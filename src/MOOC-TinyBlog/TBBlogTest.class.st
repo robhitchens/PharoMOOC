@@ -98,6 +98,13 @@ TBBlogTest >> testRemoveAllBlogPosts [
 ]
 
 { #category : #tests }
+TBBlogTest >> testRemoveBlogPost [
+	self assert: blog size equals: 1.
+	blog removeBlogPost: blog allBlogPosts anyOne.
+	self assert: blog size equals: 0
+]
+
+{ #category : #tests }
 TBBlogTest >> testRenameCategoryTo [
 	| categoryToRename newCategoryName |
 	categoryToRename := 'Second Category'.

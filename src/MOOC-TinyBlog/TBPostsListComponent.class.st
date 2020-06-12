@@ -2,21 +2,10 @@ Class {
 	#name : #TBPostsListComponent,
 	#superclass : #TBScreenComponent,
 	#instVars : [
-		'currentCategory',
-		'alertSuccess'
+		'currentCategory'
 	],
 	#category : #'MOOC-TinyBlog-Components'
 }
-
-{ #category : #accessing }
-TBPostsListComponent >> alertSuccess [
-	^ alertSuccess 
-]
-
-{ #category : #accessing }
-TBPostsListComponent >> alertSuccess: aString [
-	alertSuccess := aString
-]
 
 { #category : #rendering }
 TBPostsListComponent >> basicRenderCategoriesOn: html [ 
@@ -39,6 +28,11 @@ TBPostsListComponent >> currentCategory [
 { #category : #accessing }
 TBPostsListComponent >> currentCategory: anObject [
 	currentCategory := anObject 
+]
+
+{ #category : #'as yet unclassified' }
+TBPostsListComponent >> gotoAdministration [
+	self call: TBAdminComponent new
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,10 +61,6 @@ TBPostsListComponent >> renderCategoryColumnOn: html [
 TBPostsListComponent >> renderContentOn: html [
 	super renderContentOn: html.
 	html render: (TBAuthenticationComponent from: self).
-	self alertSuccess ifNotNil: [ 
-		html tbsAlert beSuccess;
-		 	with: [ html strong: 'Message:'. html text: self alertSuccess ].
-			self alertSuccess: nil ].
 	html tbsContainer: [ 
 		html tbsRow 
 			showGrid;
@@ -90,6 +80,11 @@ TBPostsListComponent >> renderPostColumnOn: html [
 
 { #category : #rendering }
 TBPostsListComponent >> renderSignInOn: html [ 
-	html tbsGlyphIcon perform: #iconLock.
-	html html: '<a data-toggle="modal" href="#myAuthDialog" class="link">SignIn</a>'.
+	self session isLogged
+	ifFalse: [ 
+		html tbsGlyphIcon perform: #iconLock.
+		html html: '<a data-toggle="modal" href="#myAuthDialog" class="link">SignIn</a>'. ] 
+	ifTrue: [ 
+		html tbsGlyphIcon perform: #iconUser.
+		html anchor callback: [ self gotoAdministration ]; with: 'Private area' ]
 ]
