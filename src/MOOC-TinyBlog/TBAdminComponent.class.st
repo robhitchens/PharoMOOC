@@ -47,7 +47,7 @@ TBAdminComponent >> renderContentOn: html [
 TBAdminComponent >> renderDisconnectOn: html [
 	self session isLogged
 		ifFalse: [ ^ self ].
-	html tbsGlyphIcon perform: #iconLock.
+	html tbsGlyphIcon perform: #iconLogout.
 	html anchor callback: [ self disconnect ]; with: 'Disconnect'.
 ]
 

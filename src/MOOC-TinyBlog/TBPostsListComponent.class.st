@@ -82,7 +82,7 @@ TBPostsListComponent >> renderPostColumnOn: html [
 TBPostsListComponent >> renderSignInOn: html [ 
 	self session isLogged
 	ifFalse: [ 
-		html tbsGlyphIcon perform: #iconLock.
+		html tbsGlyphIcon perform: #iconLogin.
 		html html: '<a data-toggle="modal" href="#myAuthDialog" class="link">SignIn</a>'. ] 
 	ifTrue: [ 
 		html tbsGlyphIcon perform: #iconUser.
