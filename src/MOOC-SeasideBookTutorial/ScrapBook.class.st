@@ -15,7 +15,24 @@ ScrapBook >> renderContentOn: html [
 	html
 		paragraph:
 			'Welcome to my Seaside web site. In the future you will find all sorts of applications here such as:'.
-	html
-		orderedList: [ 
-			self items do: [ :each | html listItem: each ] ]
+	html table: [ 
+		html tableRow: [ 
+			html tableHeading: 'Calendars'.
+			html tableData: '1/1/2006'.
+			html tableData: 'Track events, holidays etc' ].
+		html tableRow: [ 
+			html tableHeading: 'TODO lists'.
+			html tableData: '5/1/2006'.
+			html tableData: 'Keep track of all the things to remember to do.' ].
+		html tableRow: [ 
+			html tableHeading: 'Shopping carts'.
+			html tableData: '8/1/2006'.
+			html tableData: 'Enable your customer to shop online.' ] ].
+	html span class: 'error'; with: 'This site does not work yet'.
+]
+
+{ #category : #hooks }
+ScrapBook >> style [ 
+	^ 'h1 { text-align: center; }
+	span.error {background-color: red; }'
 ]
