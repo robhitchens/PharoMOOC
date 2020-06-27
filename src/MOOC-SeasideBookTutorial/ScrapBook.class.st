@@ -11,6 +11,6 @@ ScrapBook >> renderContentOn: html [
 		10 timesRepeat: [ 
 			html image 
 				url: 'http://www.seaside.st/styles/logo-plain.png';
-				width: 50.
-				html horizontalRule  ] ]
+				width: 50 ].
+			html horizontalRule  ]
 ]
