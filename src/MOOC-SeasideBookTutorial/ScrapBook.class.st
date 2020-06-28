@@ -33,6 +33,6 @@ ScrapBook >> renderContentOn: html [
 
 { #category : #hooks }
 ScrapBook >> style [ 
-	^ 'h1 { text-align: center; }
+	^ 'h1 {text-align: center; color: green;}
 	span.error {background-color: red; }'
 ]
