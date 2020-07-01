@@ -3,7 +3,10 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'emailAddress'
+		'emailAddress',
+		'gender',
+		'requestsEmailUpdates',
+		'birthdate'
 	],
 	#classVars : [
 		'Database'
@@ -45,6 +48,26 @@ IAContact class >> removeContact: aContact [
 	self contacts remove: aContact 
 ]
 
+{ #category : #'as yet unclassified' }
+IAContact >> beFemale [
+	gender := #Female
+]
+
+{ #category : #'as yet unclassified' }
+IAContact >> beMale [
+	gender := #Male
+]
+
+{ #category : #accessing }
+IAContact >> birthdate [
+	^ birthdate ifNil: [ birthdate := (Date today) ]
+]
+
+{ #category : #accessing }
+IAContact >> birthdate: anObject [
+	birthdate := anObject
+]
+
 { #category : #accessing }
 IAContact >> emailAddress [
 	^ emailAddress
@@ -56,6 +79,21 @@ IAContact >> emailAddress: aString [
 ]
 
 { #category : #accessing }
+IAContact >> gender [
+	^ gender ifNil: [ gender := #Male ]
+]
+
+{ #category : #testing }
+IAContact >> isFemale [
+	^ self gender = #Female
+]
+
+{ #category : #testing }
+IAContact >> isMale [
+ 	^ self gender = #Male
+]
+
+{ #category : #accessing }
 IAContact >> name [
 	^ name
 ]
@@ -63,4 +101,14 @@ IAContact >> name [
 { #category : #accessing }
 IAContact >> name: aString [
 	name := aString
+]
+
+{ #category : #accessing }
+IAContact >> requestsEmailUpdates [
+	^ requestsEmailUpdates ifNil: [ requestsEmailUpdates := false ]
+]
+
+{ #category : #accessing }
+IAContact >> requestsEmailUpdates: aBoolean [
+	requestsEmailUpdates := aBoolean 
 ]
