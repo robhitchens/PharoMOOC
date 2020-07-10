@@ -18,8 +18,10 @@ IAContactListView >> editContact: aContact [
 	view := IAContactView new.
 	copy := aContact copy.
 	view contact: copy.
-	(self call: view)
-		ifTrue: [ IAContact removeContact: aContact; addContact: copy ].
+	self show: view onAnswer: [ :answer | 
+		self inform: 'Thanks for editing ', aContact name ]
+"	(self call: view)
+		ifTrue: [ IAContact removeContact: aContact; addContact: copy ]."
 "	self inform: 'Thanks for editing ', aContact name"
 ]
 
