@@ -46,3 +46,8 @@ WebCounter >> renderContentOn: html [
 	html space.
 	html anchor callback: [ self decrease ]; with: '--'.
 ]
+
+{ #category : #hooks }
+WebCounter >> states [
+	^ Array with: self
+]

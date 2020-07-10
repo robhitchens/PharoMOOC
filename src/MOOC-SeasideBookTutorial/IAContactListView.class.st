@@ -12,6 +12,17 @@ IAContactListView >> addContact [
 	IAContact addContact: (IAContact name: name emailAddress: emailAddress)
 ]
 
+{ #category : #editing }
+IAContactListView >> editContact: aContact [
+ 	| view copy |
+	view := IAContactView new.
+	copy := aContact copy.
+	view contact: copy.
+	(self call: view)
+		ifTrue: [ IAContact removeContact: aContact; addContact: copy ].
+"	self inform: 'Thanks for editing ', aContact name"
+]
+
 { #category : #removing }
 IAContactListView >> removeContact: aContact [
 	(self confirm: 'Are you sure that you want to remove this contact?')
@@ -26,6 +37,10 @@ IAContactListView >> renderContact: aContact on: html [
 		url: 'mailto:', aContact emailAddress;
 		with: aContact emailAddress.
 	html text: ' ('.
+	html anchor 
+		callback: [ self editContact: aContact ];
+		with: 'edit'.
+		html space.
 	html anchor 
 		callback: [ self removeContact: aContact ];
 		with: 'remove'.
