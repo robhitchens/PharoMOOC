@@ -39,7 +39,9 @@ IAAddress >> editContact: aContact [
 IAAddress >> initialize [ 
 	super initialize.
 	editor := IAContactView new.
-	editor contact: self contacts first
+	editor contact: self contacts first.
+	editor addMessage: 'Editing...'.
+	editor onAnswer: [ :answer | self inform: 'Saved', answer printString ]
 ]
 
 { #category : #removing }

@@ -22,6 +22,12 @@ IAContactView >> contact: anIAContact [
 	contact := anIAContact 
 ]
 
+{ #category : #initialization }
+IAContactView >> initialize [
+	super initialize.
+	self addDecoration: (WAFormDecoration new buttons: #(cancel save)).
+]
+
 { #category : #rendering }
 IAContactView >> renderContentOn: html [ 
 	html form: [ 
@@ -30,7 +36,7 @@ IAContactView >> renderContentOn: html [
 		self renderGenderOn: html.
 		self renderSendUpdatesOn: html.
 		self renderDateOn: html.
-		self renderSaveOn: html ]
+		"self renderSaveOn: html" ]
 ]
 
 { #category : #rendering }
