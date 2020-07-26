@@ -1,6 +1,9 @@
 Class {
 	#name : #ToDoListView,
 	#superclass : #WAComponent,
+	#instVars : [
+		'editor'
+	],
 	#category : #'MOOC-SeasideBookTutorial-ToDo-View'
 }
 
@@ -12,7 +15,16 @@ ToDoListView class >> initialize [
 
 { #category : #adding }
 ToDoListView >> add [
-	self model add: ToDoItem new
+	editor := ToDoItemView new model: ToDoItem new.
+	editor onAnswer: [ :value | 
+		value isNil 
+			ifFalse: [ self model add: value ].
+		editor := nil ]
+]
+
+{ #category : #hooks }
+ToDoListView >> children [ 
+	^ Array with: editor
 ]
 
 { #category : #actions }
@@ -39,11 +51,12 @@ ToDoListView >> remove: anItem [
 ToDoListView >> renderContentOn: html [
 	html heading: self model title.
 	html form: [  
-	html anchor 
-		callback: [ self add ];
-		with: 'add'.
 	html unorderedList: [ self renderItemsOn: html ] .
-	html submitButton: 'Save' ]
+	html submitButton text: 'Save'.
+	html submitButton 
+		callback: [ self add ];
+		text: 'Add' ].
+	html render: editor
 ]
 
 { #category : #rendering }
