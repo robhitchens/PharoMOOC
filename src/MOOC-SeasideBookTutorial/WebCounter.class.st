@@ -41,6 +41,7 @@ WebCounter >> initialize [
 
 { #category : #rendering }
 WebCounter >> renderContentOn: html [ 
+	html image url: (CounterLibrary / #logoplainPng).
 	html heading: count.
 	html anchor callback: [ self increase ]; with: '++'.
 	html space.
@@ -50,4 +51,10 @@ WebCounter >> renderContentOn: html [
 { #category : #hooks }
 WebCounter >> states [
 	^ Array with: self
+]
+
+{ #category : #updating }
+WebCounter >> updateRoot: anHtmlRoot [ 
+	super updateRoot: anHtmlRoot.
+	anHtmlRoot stylesheet url: (CounterLibrary / #mainCss)
 ]
