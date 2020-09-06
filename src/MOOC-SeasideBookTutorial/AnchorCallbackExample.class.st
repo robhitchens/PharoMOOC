@@ -24,5 +24,9 @@ AnchorCallbackExample >> renderContentOn: html [
 	html break.
 	html anchor 
 		callback: [ self anchorClicked ];
-		with: 'click to increment'
+		with: 'click to increment'.
+	html break.
+	html anchor 
+		callback: [ self show: (WAInspector current on: self session) ];
+		with: 'Inspect Session'
 ]
